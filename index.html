@@ -212,6 +212,22 @@ function exportAuditLog(){
   const blob=new Blob([csv],{type:'text/csv'});const url=URL.createObjectURL(blob);
   const a=document.createElement('a');a.href=url;a.download="audit_log.csv";a.click();URL.revokeObjectURL(url);
 }
+  function forgotPassword() {
+  const lrn = prompt("Enter your 12-digit LRN to reset your password:");
+  if (!lrn) return;
+  if (lrn.length !== 12) return alert("LRN must be 12 digits!");
+
+  const user = users.find(u => u.lrn === lrn);
+  if (!user) return alert("No account found with that LRN.");
+
+  const newPass = prompt("Enter your new password:");
+  if (!newPass) return alert("Password reset cancelled.");
+
+  user.pass = newPass;
+  localStorage.setItem('users', JSON.stringify(users));
+  alert("Password successfully reset! You can now log in with your new password.");
+}
 </script>
 </body>
 </html>
+
