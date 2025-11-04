@@ -41,9 +41,12 @@ canvas{max-width:100%;}
   <h2>Vote Your Candidate</h2>
   <select id="candidateSelect">
     <option value="">Select Candidate</option>
-    <option value="Candidate A">Candidate A</option>
-    <option value="Candidate B">Candidate B</option>
-    <option value="Candidate C">Candidate C</option>
+    <option value="Maria Santos">Maria Santos – Grade 12 STEM</option>
+    <option value="John Cruz">John Cruz – Grade 12 HUMSS</option>
+    <option value="Ana Dela Rosa">Ana Dela Rosa – Grade 11 TVL</option>
+    <option value="Carlo Mendoza">Carlo Mendoza – Grade 11 ABM</option>
+    <option value="Louise Tan">Louise Tan – Grade 12 GAS</option>
+    <option value="Mark Dizon">Mark Dizon – Grade 11 ICT</option>
   </select>
   <button onclick="vote()">Submit Vote</button>
   <button style="background:#777;" onclick="logout()">Logout</button>
@@ -61,9 +64,16 @@ canvas{max-width:100%;}
 
 <script>
 let users = JSON.parse(localStorage.getItem('users')) || [
-  {lrn:'123456789012',pass:'student123',voted:false},
-  {lrn:'111122223333',pass:'password',voted:false},
-  {lrn:'987654321000',pass:'abc123',voted:false}
+  {lrn:'202500000001',pass:'student1',voted:false},
+  {lrn:'202500000002',pass:'student2',voted:false},
+  {lrn:'202500000003',pass:'student3',voted:false},
+  {lrn:'202500000004',pass:'student4',voted:false},
+  {lrn:'202500000005',pass:'student5',voted:false},
+  {lrn:'202500000006',pass:'student6',voted:false},
+  {lrn:'202500000007',pass:'student7',voted:false},
+  {lrn:'202500000008',pass:'student8',voted:false},
+  {lrn:'202500000009',pass:'student9',voted:false},
+  {lrn:'202500000010',pass:'student10',voted:false}
 ];
 let votes = JSON.parse(localStorage.getItem('votes')) || {};
 let admin = {user:'admin',pass:'admin123'};
@@ -73,6 +83,7 @@ function login(){
   const lrn = document.getElementById('loginLRN').value.trim();
   const pass = document.getElementById('loginPass').value.trim();
   if(lrn===''||pass==='')return alert('Please fill in all fields.');
+  if(lrn.length!==12)return alert('LRN must be 12 digits.');
   const user = users.find(u=>u.lrn===lrn && u.pass===pass);
   if(!user)return alert('Invalid LRN or password.');
   currentUser = user;
@@ -121,7 +132,7 @@ function renderChart(){
   const data=Object.values(votes);
   new Chart(ctx,{
     type:'bar',
-    data:{labels:labels,datasets:[{label:'Votes',data:data,borderWidth:1}]},
+    data:{labels:labels,datasets:[{label:'Votes',data:data,backgroundColor:'#0054a6',borderWidth:1}]},
     options:{scales:{y:{beginAtZero:true}}}
   });
 }
